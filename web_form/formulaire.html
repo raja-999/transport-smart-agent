@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulaire Transport Étudiant</title>
+</head>
+<body>
+    <h2>Formulaire Transport Étudiant</h2>
+    <form id="transportForm">
+        <input type="text" name="name" placeholder="Nom" required><br>
+        <input type="number" name="age" placeholder="Âge" required><br>
+        <input type="number" name="distance_km" placeholder="Distance en km" required><br>
+        <label><input type="checkbox" name="has_car"> Possède une voiture</label><br>
+        <label><input type="checkbox" name="has_bike"> Possède un vélo</label><br>
+        <label><input type="checkbox" name="has_license"> Permis de conduire</label><br>
+        <input type="text" name="current_mode" placeholder="Mode actuel"><br>
+        <input type="number" name="comfort_pref" placeholder="Préférence confort (1-5)"><br>
+        <input type="number" name="cost_pref" placeholder="Préférence coût (1-5)"><br>
+        <input type="number" name="env_pref" placeholder="Préférence environnement (1-5)"><br>
+        <input type="number" name="punctuality_pref" placeholder="Préférence ponctualité (1-5)"><br>
+        <input type="text" name="whatsapp_number" placeholder="Numéro WhatsApp (+337xxxxxxx)" required><br>
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+    document.getElementById("transportForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(this).entries());
+
+        // Convert checkbox values to true/false
+        data.has_car = !!data.has_car;
+        data.has_bike = !!data.has_bike;
+        data.has_license = !!data.has_license;
+
+        fetch("https://raja99.app.n8n.cloud/webhook-test/e3bde9fc-33c3-47ef-8282-77d15f62f043", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        })
+        .then(response => alert("Formulaire envoyé !"))
+        .catch(error => alert("Erreur lors de l'envoi : " + error));
+    });
+    </script>
+</body>
+</html>

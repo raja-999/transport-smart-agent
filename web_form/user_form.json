@@ -1,0 +1,14 @@
+{
+    "name": "Raja",
+    "age": 23,
+    "distance_km": 4.5,
+    "has_car": 0,
+    "has_bike": 1,
+    "has_license": 1,
+    "current_mode": "Bus",
+    "comfort_pref": 0.7,
+    "cost_pref": 0.5,
+    "env_pref": 0.9,
+    "punctuality_pref": 0.6
+  }
+  

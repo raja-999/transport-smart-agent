@@ -1,0 +1,97 @@
+{
+  "name": "Transport Recommendation Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "webhook-transport",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "webhook-node",
+      "name": "Webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://TON_API_PUBLIC/predict",
+        "method": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"name\": $json.name,\n  \"age\": $json.age,\n  \"distance_km\": $json.distance_km,\n  \"has_car\": $json.has_car,\n  \"has_bike\": $json.has_bike,\n  \"has_license\": $json.has_license,\n  \"current_mode\": $json.current_mode,\n  \"comfort_pref\": $json.comfort_pref,\n  \"cost_pref\": $json.cost_pref,\n  \"env_pref\": $json.env_pref,\n  \"punctuality_pref\": $json.punctuality_pref\n}"
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [250, 0],
+      "id": "http-request-node",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      whatsapp_number: $json.whatsapp_number,\n      message: `Salut ${$json.name}, voici votre recommandation de transport :\\n\n- Mode conseillé : ${$json.mode_recommande}\\n- Confort : ${$json.confort}/5\\n- Coût : ${$json.cout}/5\\n- Impact environnemental : ${$json.impact_env}/5\\n- Ponctualité : ${$json.ponctualite}/5\\n\nMerci d'utiliser notre service !`\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [500, 0],
+      "id": "code-node",
+      "name": "Prepare WhatsApp Message"
+    },
+    {
+      "parameters": {
+        "from": "+TON_NUMERO_TWILIO",
+        "to": "={{$json.whatsapp_number}}",
+        "message": "={{$json.message}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [750, 0],
+      "id": "twilio-node",
+      "name": "Send WhatsApp Message",
+      "credentials": {
+        "twilioApi": {
+          "id": "TWILIO_CREDENTIAL_ID",
+          "name": "Twilio account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Prepare WhatsApp Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare WhatsApp Message": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  ],
+  "active": true,
+  "settings": {},
+  "id": "workflow-transport-recommendation"
+}
