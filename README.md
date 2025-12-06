@@ -58,9 +58,8 @@ This setup mirrors **real-world applications** connecting AI models with user in
 
 ## 👩‍💻 Author & Citation
 
-**Raja Ben Bey**  
-Master's in Data Science (Decision Support & Optimization)  
+**Raja Ibnelbey**  
+Master's in Data Science 
 
 Passionate about **AI, optimization, automation & smart mobility**  
 
-If you use this project, please cite:  
