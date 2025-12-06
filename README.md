@@ -1,54 +1,66 @@
-🚇 Transport Smart Agent
-Intelligent Transport Recommendation System
-Chatbot + n8n Automation + FastAPI API + NSGA-II Optimization
-🎯 Project Goal
+# 🚇 Transport Smart Agent
 
-This project demonstrates how to build an end-to-end intelligent transport recommendation system using:
+**Intelligent Transport Recommendation System**  
+*Chatbot + n8n Automation + FastAPI API + NSGA-II Optimization*
 
-🌐 FastAPI (backend prediction API)
+---
 
-🤖 NSGA-II (multi-objective optimization)
+## 🎯 Project Goal
 
-🔁 n8n (workflow automation)
+This project demonstrates a full **end-to-end intelligent transport recommendation system** that suggests the **optimal transport mode** for a user based on multiple personal and contextual factors.
 
-💬 Chatbot (WhatsApp/Telegram interface)
+The system integrates:
 
-🧪 Synthetic Data (privacy-safe student dataset)
+- 🌐 **FastAPI** – Backend prediction API  
+- 🤖 **NSGA-II** – Multi-objective optimization  
+- 🔁 **n8n** – Workflow automation  
+- 💬 **Chatbot** – WhatsApp / Telegram interface  
+- 🧪 **Synthetic Data** – Privacy-safe student dataset  
 
-The system suggests the optimal transport mode for a user based on:
+**User inputs considered:**  
 
-Distance to school
+- Distance to school  
+- Age  
+- Current transport mode  
+- Car / Bike ownership  
+- Driving license  
+- Comfort preference  
+- Cost preference  
+- Environmental preference  
+- Punctuality preference  
 
-Age
+---
 
-Current mode
+## 🔄 How the System Works (Pipeline)
 
-Car / Bike ownership
+1. **User submits transport data** via a Google Form, web form, or chatbot.  
+2. **n8n receives the submission** through a Webhook.  
+3. **n8n forwards the data** to the FastAPI `/predict` endpoint.  
+4. **FastAPI processes the request** using NSGA-II + ML model.  
+5. **The model returns a recommended transport mode.**  
+6. **n8n sends the recommendation** to the user via WhatsApp / Telegram / Email.  
 
-Driving license
+This setup mirrors **real-world applications** connecting AI models with user interfaces for smart recommendations.  
 
-Comfort preference
+---
 
-Cost preference
+## 🚀 How to Use the n8n Workflow
 
-Environmental preference
+1. Log in to [n8n.io](https://n8n.io) (cloud or self-hosted).  
+2. Create a new workflow.  
+3. Import **`Transport Workflow.json`**.  
+4. Copy the generated **Webhook URL**.  
+5. Run the workflow.  
+6. Submit transport data from your form.  
+7. Receive a **personalized recommendation** on WhatsApp / Telegram.  
 
-Punctuality preference
+---
 
-🔄 How the System Works (Pipeline)
+## 👩‍💻 Author & Citation
 
-User fills a transport form (Google Form / Web form / Chatbot)
+**Raja Ben Bey**  
+Master's in Data Science (Decision Support & Optimization)  
 
-n8n receives the submission using a Webhook
+Passionate about **AI, optimization, automation & smart mobility**  
 
-n8n sends the data to the FastAPI endpoint /predict
-
-FastAPI runs the NSGA-II + ML model
-
-The model returns a recommended transport mode
-
-n8n forwards the result to WhatsApp / Telegram / Email
-
-The user receives a personalized transport recommendation
-
-This pipeline replicates how real companies connect AI models to chatbots.
+If you use this project, please cite:  
